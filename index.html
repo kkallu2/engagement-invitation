@@ -18,6 +18,52 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Simple Click to Start Overlay */
+        .click-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+
+        .click-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .click-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .click-text {
+            font-size: 28px;
+            color: #d4af37;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
         .video-container {
             width: 100vw;
             height: 100vh;
@@ -65,6 +111,119 @@
             100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
         }
 
+        /* Animated Hearts */
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: #ff69b4;
+            animation: floatHeart 6s infinite;
+            z-index: 3;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Animated Flowers */
+        .flower {
+            position: absolute;
+            font-size: 35px;
+            animation: floatFlower 8s infinite;
+            z-index: 3;
+        }
+
+        @keyframes floatFlower {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(-180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animated Rings */
+        .ring {
+            position: absolute;
+            font-size: 40px;
+            animation: floatRing 7s infinite;
+            z-index: 3;
+        }
+
+        @keyframes floatRing {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Butterflies */
+        .butterfly {
+            position: absolute;
+            font-size: 25px;
+            animation: floatButterfly 10s infinite;
+            z-index: 3;
+        }
+
+        @keyframes floatButterfly {
+            0% {
+                transform: translate(0, 100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            25% {
+                transform: translate(50px, 75vh);
+            }
+            50% {
+                transform: translate(-30px, 50vh);
+            }
+            75% {
+                transform: translate(40px, 25vh);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-20px, -20vh);
+                opacity: 0;
+            }
+        }
+
         /* Fireworks */
         .firework {
             position: absolute;
@@ -83,6 +242,32 @@
                 transform: translate(var(--x), var(--y));
                 opacity: 0;
             }
+        }
+
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .music-control:hover {
+            background: #d4af37;
+            transform: scale(1.1);
         }
 
         /* Scene 0: Family Invitation */
@@ -308,8 +493,16 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
         }
 
-        /* Mobile specific adjustments */
         @media (max-width: 768px) {
+            .click-icon {
+                font-size: 60px;
+            }
+
+            .click-text {
+                font-size: 20px;
+                padding: 0 20px;
+            }
+
             .scene {
                 padding: 15px;
             }
@@ -356,9 +549,24 @@
                 bottom: 15px;
                 right: 15px;
             }
+
+            .music-control {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .heart, .flower, .ring {
+                font-size: 25px;
+            }
+
+            .butterfly {
+                font-size: 20px;
+            }
         }
 
-        /* Very small screens */
         @media (max-width: 400px) {
             .scene-0 .family-invite {
                 letter-spacing: 1px;
@@ -381,7 +589,6 @@
             }
         }
 
-        /* Landscape mobile */
         @media (max-height: 500px) and (orientation: landscape) {
             .scene {
                 padding: 10px;
@@ -417,27 +624,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Simple Click to Start -->
+    <div class="click-overlay" id="clickOverlay" onclick="startExperience()">
+        <div class="click-icon">💕</div>
+        <div class="click-text">Tap Anywhere to View</div>
+    </div>
+
     <div class="video-container">
+        <!-- Background Music - Soothing Romantic Piano -->
+        <audio id="bgMusic" loop>
+            <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_4de3bcfae9.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Music control button -->
+        <button class="music-control" id="musicBtn" onclick="toggleMusic()">
+            🔊
+        </button>
+
         <div class="particles" id="particles"></div>
         <div id="fireworks-container"></div>
+        <div id="decorations-container"></div>
 
         <div class="light-ray" style="left: 20%; animation-delay: 0s;"></div>
         <div class="light-ray" style="left: 50%; animation-delay: 1s;"></div>
         <div class="light-ray" style="left: 80%; animation-delay: 2s;"></div>
 
-        <!-- Scene 0: Family Invitation -->
         <div class="scene scene-0">
             <div class="family-invite">The Challa & Kallu Families</div>
             <div class="family-names">Cordially Invite You</div>
             <div class="invite-line">To Celebrate The Union Of</div>
         </div>
 
-        <!-- Scene 1: Opening -->
         <div class="scene scene-1">
             <div class="subtitle">Join Us in Celebration</div>
         </div>
 
-        <!-- Scene 2: Names -->
         <div class="scene scene-2">
             <div class="names-container">
                 <div class="bride-name">Challa Alekhya Reddy</div>
@@ -446,7 +667,6 @@
             </div>
         </div>
 
-        <!-- Scene 3: Details -->
         <div class="scene scene-3">
             <div class="invite-text">Engagement Ceremony</div>
             <div class="details">
@@ -459,7 +679,7 @@
                     <div class="detail-value">
                         S Convention Hall<br>
                         Opposite to SBI Bank, Sagar Road<br>
-                        Bairamal Guda, Karmanghat, L.B Nagar<br>
+                        Bairamal Guda, Karmanghat<br>
                         Hyderabad - 500079, Telangana
                     </div>
                 </div>
@@ -473,6 +693,39 @@
     </div>
 
     <script>
+        let musicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function startExperience() {
+            // Hide the overlay
+            document.getElementById('clickOverlay').classList.add('hidden');
+            
+            // Start music
+            bgMusic.play().then(() => {
+                musicPlaying = true;
+                musicBtn.textContent = '🔊';
+            }).catch(err => {
+                console.log('Music play failed:', err);
+                musicBtn.textContent = '🔇';
+            });
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                musicPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                    musicPlaying = true;
+                }).catch(err => {
+                    console.log('Music play failed:', err);
+                });
+            }
+        }
+
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const isMobile = window.innerWidth < 768;
@@ -485,6 +738,33 @@
                 particle.style.animationDelay = Math.random() * 8 + 's';
                 particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
                 particlesContainer.appendChild(particle);
+            }
+        }
+
+        function createDecorations() {
+            const container = document.getElementById('decorations-container');
+            const isMobile = window.innerWidth < 768;
+            const decorationCount = isMobile ? 15 : 25;
+
+            const emojis = [
+                { type: 'heart', emoji: '💕' },
+                { type: 'heart', emoji: '💖' },
+                { type: 'heart', emoji: '💗' },
+                { type: 'flower', emoji: '🌸' },
+                { type: 'flower', emoji: '🌺' },
+                { type: 'flower', emoji: '🌹' },
+                { type: 'ring', emoji: '💍' },
+                { type: 'butterfly', emoji: '🦋' }
+            ];
+
+            for (let i = 0; i < decorationCount; i++) {
+                const decoration = document.createElement('div');
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                decoration.className = randomEmoji.type;
+                decoration.textContent = randomEmoji.emoji;
+                decoration.style.left = Math.random() * 100 + '%';
+                decoration.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(decoration);
             }
         }
 
@@ -517,50 +797,24 @@
         }
 
         function launchFireworks() {
-            // Fireworks during name reveal
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.2, window.innerHeight * 0.3);
-            }, 8000);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.8, window.innerHeight * 0.4);
-            }, 8500);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.5, window.innerHeight * 0.2);
-            }, 9000);
-
-            // More fireworks at final scene
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.3, window.innerHeight * 0.5);
-            }, 12500);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.7, window.innerHeight * 0.3);
-            }, 13000);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.5, window.innerHeight * 0.6);
-            }, 13500);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.15, window.innerHeight * 0.4);
-            }, 14000);
-
-            setTimeout(() => {
-                createFirework(window.innerWidth * 0.85, window.innerHeight * 0.5);
-            }, 14500);
+            setTimeout(() => createFirework(window.innerWidth * 0.2, window.innerHeight * 0.3), 8000);
+            setTimeout(() => createFirework(window.innerWidth * 0.8, window.innerHeight * 0.4), 8500);
+            setTimeout(() => createFirework(window.innerWidth * 0.5, window.innerHeight * 0.2), 9000);
+            setTimeout(() => createFirework(window.innerWidth * 0.3, window.innerHeight * 0.5), 12500);
+            setTimeout(() => createFirework(window.innerWidth * 0.7, window.innerHeight * 0.3), 13000);
+            setTimeout(() => createFirework(window.innerWidth * 0.5, window.innerHeight * 0.6), 13500);
+            setTimeout(() => createFirework(window.innerWidth * 0.15, window.innerHeight * 0.4), 14000);
+            setTimeout(() => createFirework(window.innerWidth * 0.85, window.innerHeight * 0.5), 14500);
         }
 
         function replayAnimation() {
             location.reload();
         }
 
-        // Initialize
         createParticles();
+        createDecorations();
         launchFireworks();
 
-        // Prevent zoom on double tap for better mobile experience
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             const now = (new Date()).getTime();
